@@ -94,7 +94,7 @@
     }
 
     /* ===================================================== */
-    /* ============== HAI DẤU TRANG ======================== */
+    /* ============== BA DẤU TRANG ========================= */
     /* ===================================================== */
 
     .bookmarks-wrapper {
@@ -114,17 +114,17 @@
       align-items: flex-end;
     }
 
-    /* Tăng chiều cao để chứa đủ icon + text */
+    /* Tab dấu trang */
     .bookmark-trigger {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+      justify-content: center;
       width: 52px;
-      height: 96px;            /* Tăng từ 76px lên 96px */
-      padding-top: 4px;        /* Đẩy nội dung xuống một chút cho cân */
-      padding-bottom: 18px;    /* Chừa chỗ cho phần notch chữ V ở dưới */
+      height: 96px;
+      padding-top: 4px;
+      padding-bottom: 18px;
       border: none;
       border-radius: 0 0 8px 8px;
       cursor: pointer;
@@ -144,14 +144,14 @@
       bottom: -1px;
       left: 0;
       width: 100%;
-      height: 16px; /* Tăng nhẹ phần notch */
+      height: 16px;
       background: #fefcf9;
       clip-path: polygon(0 100%, 50% 0, 100% 100%);
       transition: background 0.3s;
     }
 
     .bookmark-trigger:hover {
-      height: 104px; /* Tăng tương ứng khi hover */
+      height: 104px;
       box-shadow: 
         0 10px 24px -4px rgba(80, 60, 40, 0.55),
         inset 0 1px 0 rgba(255, 255, 255, 0.35);
@@ -161,10 +161,17 @@
       transform: translateY(1px);
     }
 
+    /* Dấu trang Tác phẩm (mặc định) */
+    .bookmark--gallery .bookmark-trigger {
+      background: linear-gradient(160deg, #a68d74 0%, #7d6650 100%);
+    }
+
+    /* Dấu trang Giới thiệu */
     .bookmark--about .bookmark-trigger {
       background: linear-gradient(160deg, #8a9687 0%, #5f6b5c 100%);
     }
 
+    /* Dấu trang Liên hệ */
     .bookmark--contact .bookmark-trigger {
       background: linear-gradient(160deg, #b9a48e 0%, #8f7a63 100%);
     }
@@ -177,7 +184,7 @@
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
-      margin-bottom: 6px; /* Khoảng cách giữa icon và chữ rõ ràng hơn */
+      margin-bottom: 6px;
       transition: transform 0.35s ease;
     }
 
@@ -196,11 +203,16 @@
       padding: 0 2px;
     }
 
+    /* Trạng thái active */
     .bookmark.active .bookmark-trigger {
-      height: 108px; /* Tăng tương ứng trạng thái active */
+      height: 108px;
       box-shadow: 
         0 12px 28px -4px rgba(80, 60, 40, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .bookmark--gallery.active .bookmark-trigger {
+      background: linear-gradient(160deg, #7d6650 0%, #564435 100%);
     }
 
     .bookmark--about.active .bookmark-trigger {
@@ -254,7 +266,7 @@
       padding-bottom: 1.15rem;
       margin-bottom: 1.25rem;
       gap: 0.85rem;
-      padding-right: 8rem;
+      padding-right: 12rem; /* Chừa chỗ cho 3 bookmark */
       flex-shrink: 0;
     }
 
@@ -804,7 +816,7 @@
         max-height: none;
         padding: 1.5rem 1.35rem 0;
       }
-      .agency-header { padding-right: 7rem; }
+      .agency-header { padding-right: 11rem; }
       .artwork-card {
         flex-direction: column;
         padding: 1.25rem;
@@ -829,7 +841,7 @@
       body { padding: 1.15rem 0.7rem 0.9rem; background-attachment: scroll; }
       .book-container { padding: 1.35rem 1rem 0; }
       .book-container::before { width: 9px; }
-      .agency-header { padding-right: 6rem; }
+      .agency-header { padding-right: 9.5rem; }
       .agency-name h1 { font-size: 1.65rem; }
       .agency-name .sub { letter-spacing: 0.22em; }
       .header-tagline { font-size: 0.88rem; }
@@ -874,7 +886,7 @@
       body { padding: 0.9rem 0.45rem 0.7rem; }
       .book-container { padding: 1.15rem 0.8rem 0; border-radius: 3px 8px 8px 3px; }
       .book-container::before { width: 8px; }
-      .agency-header { padding-right: 5.5rem; }
+      .agency-header { padding-right: 8rem; }
       .agency-name h1 { font-size: 1.45rem; }
       .agency-name .sub { font-size: 0.58rem; letter-spacing: 0.18em; }
       .header-tagline { font-size: 0.82rem; }
@@ -916,7 +928,7 @@
       .artwork-details h2 { font-size: 1.1rem; }
       .nav-label { max-width: 44px; font-size: 0.66rem; }
       .arrow-svg { width: 18px; height: 18px; }
-      .agency-header { padding-right: 5rem; }
+      .agency-header { padding-right: 7rem; }
       .bookmark-trigger { 
         width: 36px; 
         height: 70px; 
@@ -943,9 +955,21 @@
 
 <div class="book-container">
 
-  <!-- ===== HAI DẤU TRANG – góc trên phải ===== -->
+  <!-- ===== BA DẤU TRANG – góc trên phải ===== -->
   <div class="bookmarks-wrapper">
-    <!-- Dấu trang Giới thiệu (bên trái) -->
+    <!-- Dấu trang Tác phẩm (bên trái) -->
+    <div class="bookmark bookmark--gallery active" id="bookmarkGallery">
+      <button class="bookmark-trigger" id="galleryTrigger" aria-label="Mở trang tác phẩm" aria-expanded="true">
+        <svg class="bookmark-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <span class="bookmark-text">Tác phẩm</span>
+      </button>
+    </div>
+
+    <!-- Dấu trang Giới thiệu (giữa) -->
     <div class="bookmark bookmark--about" id="bookmarkAbout">
       <button class="bookmark-trigger" id="aboutTrigger" aria-label="Mở trang giới thiệu" aria-expanded="false">
         <svg class="bookmark-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1188,8 +1212,11 @@
   const pageAbout = document.getElementById('pageAbout');
   const pageContact = document.getElementById('pageContact');
 
+  const bookmarkGallery = document.getElementById('bookmarkGallery');
   const bookmarkAbout = document.getElementById('bookmarkAbout');
   const bookmarkContact = document.getElementById('bookmarkContact');
+  
+  const galleryTrigger = document.getElementById('galleryTrigger');
   const aboutTrigger = document.getElementById('aboutTrigger');
   const contactTrigger = document.getElementById('contactTrigger');
 
@@ -1198,27 +1225,23 @@
   const lightboxCaption = document.getElementById('lightboxCaption');
   const lightboxClose = document.getElementById('lightboxClose');
 
+  // ===== CHUYỂN TRANG BẰNG BOOKMARK =====
   function showPage(pageName) {
     const pages = { gallery: pageGallery, about: pageAbout, contact: pageContact };
+    const bookmarks = { gallery: bookmarkGallery, about: bookmarkAbout, contact: bookmarkContact };
+    const triggers = { gallery: galleryTrigger, about: aboutTrigger, contact: contactTrigger };
 
-    pageGallery.classList.remove('active');
-    pageAbout.classList.remove('active');
-    pageContact.classList.remove('active');
-    bookmarkAbout.classList.remove('active');
-    bookmarkContact.classList.remove('active');
-    aboutTrigger.setAttribute('aria-expanded', 'false');
-    contactTrigger.setAttribute('aria-expanded', 'false');
+    // Ẩn tất cả các trang và bookmark
+    Object.values(pages).forEach(p => p.classList.remove('active'));
+    Object.values(bookmarks).forEach(b => b.classList.remove('active'));
+    Object.values(triggers).forEach(t => t.setAttribute('aria-expanded', 'false'));
 
+    // Hiển thị trang được chọn
     pages[pageName].classList.add('active');
+    bookmarks[pageName].classList.add('active');
+    triggers[pageName].setAttribute('aria-expanded', 'true');
 
-    if (pageName === 'about') {
-      bookmarkAbout.classList.add('active');
-      aboutTrigger.setAttribute('aria-expanded', 'true');
-    } else if (pageName === 'contact') {
-      bookmarkContact.classList.add('active');
-      contactTrigger.setAttribute('aria-expanded', 'true');
-    }
-
+    // Xử lý autoplay
     if (pageName === 'gallery') {
       startAutoplay();
     } else {
@@ -1226,18 +1249,23 @@
     }
   }
 
+  // Gắn sự kiện click cho 3 bookmark
+  galleryTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showPage('gallery');
+  });
+
   aboutTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (pageAbout.classList.contains('active')) showPage('gallery');
-    else showPage('about');
+    showPage('about');
   });
 
   contactTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (pageContact.classList.contains('active')) showPage('gallery');
-    else showPage('contact');
+    showPage('contact');
   });
 
+  // ===== AUTOPLAY =====
   let autoplayTimer = null;
 
   function startAutoplay() {
@@ -1265,6 +1293,7 @@
     if (pageGallery.classList.contains('active')) startAutoplay();
   }
 
+  // ===== LIGHTBOX =====
   function openLightbox(artwork) {
     stopAutoplay();
     lightboxImg.src = artwork.fullImage;
@@ -1295,6 +1324,7 @@
     if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) closeLightbox();
   });
 
+  // ===== RENDER GALLERY =====
   function renderDots() {
     pageDots.innerHTML = '';
     for (let i = 0; i < totalPages; i++) {
@@ -1366,8 +1396,10 @@
     else if (pageGallery.classList.contains('active') && !lightboxOverlay.classList.contains('active')) startAutoplay();
   });
 
+  // ===== KHỞI TẠO =====
   updateUI();
-  startAutoplay();
+  // Mặc định mở trang Gallery (Tác phẩm)
+  showPage('gallery');
 </script>
 
 </body>
